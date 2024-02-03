@@ -23,10 +23,12 @@ class ResponseMiddleware:
                     print(e)
                 error = {
                     "status_code": response.status_code,
-                    "message": content["result"] if not has_content_html else response.reason_phrase
+                    "message": content["result"]
+                    if not has_content_html
+                    else response.reason_phrase,
                 }
                 content["error"] = error
                 content.pop("result")
-            
+
             response.content = json.dumps(content)
             return response
