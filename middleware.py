@@ -1,6 +1,7 @@
 import json
 
-from django.http import HttpResponse
+from django.http import HttpResponse as DjangoResponse
+from rest_framework.response import Response as DrfResponse
 
 
 class ResponseMiddleware:
@@ -11,16 +12,34 @@ class ResponseMiddleware:
         response = self.get_response(request)
         ok = 200 <= response.status_code < 400
 
+        # for DRF
+        if isinstance(response, DrfResponse):
+            data = {"ok": ok, "result": response.data}
+
+            if not ok:
+                try:
+                    error = {
+                        "status_code": response.status_code,
+                        "message": data["result"][0],
+                        "code": data["result"][0].code,
+                    }
+                except Exception:
+                    error = {"status_code": response.status_code, **data["result"]}
+                data["error"] = error
+                data.pop("result")
+
+            response.data = data
+            response._is_rendered = False
+            response.render()
+            return response
+
         # for Django Only
-        if isinstance(response, HttpResponse):
+        if isinstance(response, DjangoResponse):
             response.headers["Content-Type"] = "application/json"
             content = {"ok": ok, "result": str(response.content, "utf-8")}
 
             if not ok:
-                try:
-                    has_content_html = content["result"].find("<!doctype html>") >= 0
-                except Exception as e:
-                    print(e)
+                has_content_html = content["result"].find("</html>") >= 0
                 error = {
                     "status_code": response.status_code,
                     "message": content["result"]
@@ -32,3 +51,5 @@ class ResponseMiddleware:
 
             response.content = json.dumps(content)
             return response
+
+        return response
