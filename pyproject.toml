@@ -1,3 +1,19 @@
+[tool.poetry]
+name = "django-pretty-response"
+version = "0.1.0"
+description = "A middleware in Django that creates clean-formatted responses."
+authors = ["Naro <knnarro@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "^3.2"
+djangorestframework = "3.13.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.ruff]
 indent-width = 4
 line-length = 88
