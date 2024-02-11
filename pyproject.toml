@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-pretty-response"
-version = "1.0.0"
+version = "1.0.1"
 description = "A middleware in Django that creates clean-formatted responses."
 authors = ["Naro <knnarro@gmail.com>"]
 license = "MIT"
