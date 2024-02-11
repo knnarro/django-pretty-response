@@ -18,8 +18,10 @@ This is a simple middleware in Django that creates clean-formatted responses, co
   }
 }
 ```
-## Usage
-Add `django_pretty_response.middleware.ResponseMiddleware` to the end your MIDDLEWARE in settings.py.
+## Install
+`$ pip install django-pretty-response`
+
+Then add `django_pretty_response.middleware.ResponseMiddleware` to the end your MIDDLEWARE in settings.py.
 ```python
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
