@@ -12,6 +12,7 @@ djangorestframework = "3.13.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.2.1"
+pre-commit = "3.5.0"
 
 [build-system]
 requires = ["poetry-core"]
