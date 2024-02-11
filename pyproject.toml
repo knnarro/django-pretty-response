@@ -14,7 +14,7 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.8"
 django = "^3.2"
-djangorestframework = "3.13.0"
+djangorestframework = "^3.13.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.2.1"
