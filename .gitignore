@@ -3,3 +3,5 @@ config/
 sample/
 manage.py
 db.sqlite3
+dist/
+.secret

@@ -1,9 +1,15 @@
 [tool.poetry]
 name = "django-pretty-response"
-version = "0.1.0"
+version = "1.0.0"
 description = "A middleware in Django that creates clean-formatted responses."
 authors = ["Naro <knnarro@gmail.com>"]
+license = "MIT"
 readme = "README.md"
+repository = "https://github.com/knnarro/django-pretty-response"
+keywords = ["django", "middleware"]
+packages = [
+    { include = "django_pretty_response" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
