@@ -2,6 +2,7 @@ import json
 
 from django.http import HttpResponse as DjangoResponse
 from rest_framework.response import Response as DrfResponse
+from rest_framework.exceptions import ErrorDetail
 
 
 class ResponseMiddleware:
@@ -17,14 +18,21 @@ class ResponseMiddleware:
             data = {"ok": ok, "result": response.data}
 
             if not ok:
-                try:
+                if isinstance(data["result"], dict):
+                    error = {"status_code": response.status_code, **data["result"]}
+                elif isinstance(data["result"], list) and isinstance(
+                    data["result"][0], ErrorDetail
+                ):
                     error = {
                         "status_code": response.status_code,
                         "message": data["result"][0],
                         "code": data["result"][0].code,
                     }
-                except Exception:
-                    error = {"status_code": response.status_code, **data["result"]}
+                else:
+                    error = {
+                        "status_code": response.status_code,
+                        "message": data["result"],
+                    }
                 data["error"] = error
                 data.pop("result")
 
