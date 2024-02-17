@@ -21,11 +21,15 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies
+    - name: Install Poetry
       run: |
         python -m pip install poetry
+        poetry config virtualenvs.create true
+        poetry config virtualenvs.in-project false
+        poetry config virtualenvs.path .virtualenvs
+    - name: Install Dependencies
+      run: |
         poetry install
     - name: Run Tests
       run: |
-        poetry shell
         python manage.py test
