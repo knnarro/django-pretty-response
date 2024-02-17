@@ -1,7 +1,6 @@
 __pycache__/
-config/
+.idea/
 sample/
-manage.py
-db.sqlite3
 dist/
+db.sqlite3
 .secret
