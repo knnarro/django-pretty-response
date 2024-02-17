@@ -27,4 +27,5 @@ jobs:
         poetry install
     - name: Run Tests
       run: |
+        poetry shell
         python manage.py test
