@@ -1,6 +1,12 @@
-__pycache__/
+# IDE
 .idea/
+# Python
+__pycache__/
+# Django
 sample/
 dist/
 db.sqlite3
 .secret
+# Coverage.py
+htmlcov
+.coverage
